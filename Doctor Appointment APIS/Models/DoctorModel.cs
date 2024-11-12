@@ -7,50 +7,50 @@ namespace Doctor_Appointment_APIS.Models
     {
         [Key]
         [StringLength(255)]
-        public string Id { get; set; }
+        public required string Id { get; set; }
 
         [Required]
         [StringLength(255)]
-        public string Fullname { get; set; }
+        public required string Fullname { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string PhoneNumber { get; set; }
+        public required string PhoneNumber { get; set; }
 
         [Required]
         [StringLength(50)]
         [EmailAddress]
-        public string Email { get; set; }
+        public required string Email { get; set; }
 
         [Required]
         [StringLength(255)]
-        public string Password { get; set; }
+        public required string Password { get; set; }
 
         public IFormFile Image { get; set; }
 
         [Required]
         [StringLength(225)]
-        public string Bio { get; set; }
+        public required string Bio { get; set; }
 
         [Required]
         [StringLength(255)]
-        public string Specialty { get; set; }
+        public required string Specialty { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string StartTime { get; set; }
+        public required string StartTime { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string EndTime { get; set; }
+        public required string EndTime { get; set; }
 
         [Required]
         [StringLength(225)]
-        public string About { get; set; }
+        public required string About { get; set; }
 
         [Required]
         [StringLength(225)]
-        public string Address { get; set; }
+        public required string Address { get; set; }
 
         [Required]
         public int MaxAppointmentDuration { get; set; }

@@ -7,39 +7,39 @@ namespace Doctor_Appointment_APIS.Models
     {
         [Key]
         [StringLength(255)]
-        public string Id { get; set; }
+        public required string Id { get; set; }
 
         public int? Indexn { get; set; }
 
         [StringLength(255)]
-        public string PatientId { get; set; }
+        public required string PatientId { get; set; }
 
 
         [Required]
         [StringLength(255)]
-        public string DoctorName { get; set; }
+        public required string DoctorName { get; set; }
 
         [Required]
         [StringLength(255)]
-        public string DoctorId { get; set; }
+        public required string DoctorId { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string StartTime { get; set; }
+        public required string StartTime { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string EndTime { get; set; }
+        public required string EndTime { get; set; }
 
         [StringLength(255)]
-        public string PatientName { get; set; }
+        public required string PatientName { get; set; }
 
         [Required]
         public bool IsAvailable { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string Date { get; set; }
+        public required string Date { get; set; }
     }
 
 }

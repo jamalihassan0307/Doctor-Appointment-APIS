@@ -79,7 +79,7 @@ namespace Doctor_Appointment_APIS.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Some Thing Want Wrong !");
+                return BadRequest($"Database Error: {ex.Message}");
             }
         }
       [HttpDelete]
@@ -97,7 +97,7 @@ namespace Doctor_Appointment_APIS.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Some Thing Want Wrong !");
+                return BadRequest($"Database Error: {ex.Message}");
             }
         } 
     }

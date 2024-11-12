@@ -6,16 +6,16 @@ namespace Doctor_Appointment_APIS.Models
     {
 
         [StringLength(255)]
-        public string ToId { get; set; }
-        public string Msg { get; set; }
+        public required string ToId { get; set; }
+        public required string Msg { get; set; }
 
         [StringLength(255)]
-        public string Readn { get; set; }
+        public required string Readn { get; set; }
 
         [StringLength(255)]
-        public string FromId { get; set; }
+        public required string FromId { get; set; }
 
         [StringLength(255)]
-        public string Sent { get; set; }
+        public required string Sent { get; set; }
     }
 }

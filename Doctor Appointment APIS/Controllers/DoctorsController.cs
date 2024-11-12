@@ -1,13 +1,7 @@
 ﻿using Doctor_Appointment_APIS.Models;
 using Patient_Appointment_APIS.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Data;
-using System.Xml.Linq;
-using System.IO;
-using System.Threading.Tasks;
-using Doctor_Appointment_APIS.Models.Doctor_Appointment_App_ApIs.Models;
 
 namespace Doctor_Appointment_APIS.Controllers
 {
@@ -15,6 +9,9 @@ namespace Doctor_Appointment_APIS.Controllers
     [ApiController]
     public class DoctorsController : ControllerBase
     {
+
+
+
         private readonly IWebHostEnvironment _environment;
 
         public DoctorsController(IWebHostEnvironment environment)
@@ -85,14 +82,12 @@ namespace Doctor_Appointment_APIS.Controllers
             {
                 var doctor = SQLDatabase.GetDataTable($"SELECT * FROM DoctorModel WHERE id='{id}'");
 
-                if (doctor != null)
-                {
+                //if (doctor!=null)
+                //{
                     return Ok(doctor);
-                }
-                else
-                {
-                    return BadRequest("User not Found");
-                }
+               
+                //    return BadRequest("User not Found");
+                //}
             }
             catch (Exception ex)
             {
@@ -107,14 +102,14 @@ namespace Doctor_Appointment_APIS.Controllers
             {
                 var doctor = SQLDatabase.GetDataTable($"SELECT fullname,image FROM DoctorModel WHERE id='{id}'");
 
-                if (doctor != null)
-                {
+                //if (doctor != null)
+                //{
                     return Ok(doctor);
-                }
-                else
-                {
-                    return BadRequest("User not Found");
-                }
+                //}
+                //else
+                //{
+                //    return BadRequest("User not Found");
+                //}
             }
             catch (Exception ex)
             {
@@ -128,14 +123,14 @@ namespace Doctor_Appointment_APIS.Controllers
             {
                 var doctor = SQLDatabase.GetDataTable($"SELECT * FROM DoctorModel WHERE email='{email}'  and password='{pass}'");
 
-                if (doctor != null)
-                {
+                //if (doctor != null)
+                //{
                     return Ok(doctor);
-                }
-                else
-                {
-                    return BadRequest("User not Found");
-                }
+                //}
+                //else
+                //{
+                //    return BadRequest("User not Found");
+                //}
             }
             catch (Exception ex)
             {
@@ -164,8 +159,7 @@ namespace Doctor_Appointment_APIS.Controllers
             { "maxAppointmentDuration", model.MaxAppointmentDuration }
         };
 
-                if (model.Image != null)
-                {
+               
                     try
                     {
                         string BasePath = Path.Combine(_environment.WebRootPath, "DoctorImage");
@@ -191,7 +185,7 @@ namespace Doctor_Appointment_APIS.Controllers
                     {
                         return BadRequest("Image Exception");
                     }
-                }
+                
 
                 int result = SQLDatabase.ExecUpdate("DoctorModel", updateValues, model.Id);
 
@@ -246,7 +240,7 @@ namespace Doctor_Appointment_APIS.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Some Thing Want Wrong !");
+                return BadRequest($"Database Error: {ex.Message}");
             }
         }
         [HttpDelete]
@@ -264,7 +258,7 @@ namespace Doctor_Appointment_APIS.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Some Thing Want Wrong !");
+                return BadRequest($"Database Error: {ex.Message}");
             }
         }
     }

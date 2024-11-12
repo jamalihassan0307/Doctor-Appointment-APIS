@@ -6,6 +6,7 @@ using System.Data;
 namespace Doctor_Appointment_APIS.Controllers
 {
     [Route("api/[controller]/[action]")]
+
     [ApiController]
     public class AppointmentsController :ControllerBase
     {
@@ -66,69 +67,33 @@ namespace Doctor_Appointment_APIS.Controllers
         [HttpGet("{doctorId}/{queryType}")]
         public DataTable SelectJoinTypeDoctorId(string queryType,string doctorId)
         {
-            string query = "";
-            switch (queryType)
+            string? query = "null";
+            query = queryType switch
             {
-                case "WHERE":
-                    query = $"SELECT* FROM AppointmentModel WHERE status = 2 AND doctorid = '{doctorId}'";
-                break;
-
-                case "LIMIT":
-                   
-                        query = $"SELECT* FROM AppointmentModel  WHERE doctorid = '{doctorId}' ORDER BY createdtime DESC LIMIT 10;";
-     
-                break;
-
-                case "ORDER BY":
-                    query = $"SELECT* FROM AppointmentModel WHERE doctorid = '{doctorId}' ORDER BY rating DESC";
-                break;
-
-                case "GROUP BY":
-                    query = $"SELECT patientname, COUNT(*) AS appointment_count  FROM AppointmentModel WHERE doctorid = '{doctorId}'  GROUP BY patientname";
-                break;
-
-                case "HAVING":
-                    query = $"SELECT patientname, COUNT(rating) AS appointment_count FROM AppointmentModel WHERE doctorid = '{doctorId}' GROUP BY patientname HAVING AVG(rating) > 3";
-                break;
-                default:
-                    query = $"SELECT* FROM AppointmentModel WHERE doctorid = '{doctorId}'";
-                    break;
-            }
+                "WHERE" => $"SELECT* FROM AppointmentModel WHERE status = 2 AND doctorid = '{doctorId}'",
+                "LIMIT" => $"SELECT* FROM AppointmentModel  WHERE doctorid = '{doctorId}' ORDER BY createdtime DESC LIMIT 10;",
+                "ORDER BY" => $"SELECT* FROM AppointmentModel WHERE doctorid = '{doctorId}' ORDER BY rating DESC",
+                "GROUP BY" => $"SELECT patientname, COUNT(*) AS appointment_count  FROM AppointmentModel WHERE doctorid = '{doctorId}'  GROUP BY patientname",
+                "HAVING" => $"SELECT patientname, COUNT(rating) AS appointment_count FROM AppointmentModel WHERE doctorid = '{doctorId}' GROUP BY patientname HAVING AVG(rating) > 3",
+                _ => $"SELECT* FROM AppointmentModel WHERE doctorid = '{doctorId}'",
+            };
             var user = SQLDatabase.GetDataTable(query);
 
             return user;
         } 
-        [HttpGet("{doctorId}/{queryType}")]
+        [HttpPut("{patientId}/{queryType}")]
         public DataTable SelectJoinTypePatientId(string queryType,string patientId)
         {
             string query = "";
-            switch (queryType)
+            query = queryType switch
             {
-                case "WHERE":
-                    query = $"SELECT* FROM AppointmentModel WHERE status = 2 AND patientId = '{patientId}'";
-                break;
-
-                case "LIMIT":
-                   
-                        query = $"SELECT* FROM AppointmentModel  WHERE patientId = '{patientId}' ORDER BY createdtime DESC LIMIT 10;";
-     
-                break;
-
-                case "ORDER BY":
-                    query = $"SELECT* FROM AppointmentModel WHERE patientId = '{patientId}' ORDER BY rating DESC";
-                break;
-
-                case "GROUP BY":
-                    query = $"SELECT patientname, COUNT(*) AS appointment_count  FROM AppointmentModel WHERE patientId = '{patientId}'  GROUP BY patientname";
-                break;
-
-                case "HAVING":
-                    query = $"SELECT patientname, COUNT(rating) AS appointment_count FROM AppointmentModel WHERE patientId = '{patientId}' GROUP BY patientname HAVING AVG(rating) > 3";
-                break;
-                default:
-                    query = $"SELECT* FROM AppointmentModel WHERE patientId = '{patientId}'";
-                    break;
-            }
+                "WHERE" => $"SELECT* FROM AppointmentModel WHERE status = 2 AND patientId = '{patientId}'",
+                "LIMIT" => $"SELECT* FROM AppointmentModel  WHERE patientId = '{patientId}' ORDER BY createdtime DESC LIMIT 10;",
+                "ORDER BY" => $"SELECT* FROM AppointmentModel WHERE patientId = '{patientId}' ORDER BY rating DESC",
+                "GROUP BY" => $"SELECT patientname, COUNT(*) AS appointment_count  FROM AppointmentModel WHERE patientId = '{patientId}'  GROUP BY patientname",
+                "HAVING" => $"SELECT patientname, COUNT(rating) AS appointment_count FROM AppointmentModel WHERE patientId = '{patientId}' GROUP BY patientname HAVING AVG(rating) > 3",
+                _ => $"SELECT* FROM AppointmentModel WHERE patientId = '{patientId}'",
+            };
             var user = SQLDatabase.GetDataTable(query);
 
             return user;
@@ -190,7 +155,7 @@ namespace Doctor_Appointment_APIS.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Some Thing Want Wrong !");
+                return BadRequest($"Database Error: {ex.Message}");
             }
         }
         [HttpDelete]
@@ -208,7 +173,7 @@ namespace Doctor_Appointment_APIS.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Some Thing Want Wrong !");
+                return BadRequest($"Database Error: {ex.Message}");
             }
         }
 

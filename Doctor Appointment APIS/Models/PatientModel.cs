@@ -6,23 +6,23 @@ namespace Doctor_Appointment_APIS.Models
     {
         [Key]
         [StringLength(255)]
-        public string Id { get; set; }
+        public required string Id { get; set; }
 
         [StringLength(225)]
-        public string Fullname { get; set; }
+        public required string Fullname { get; set; }
 
         [StringLength(100)]
-        public string PhoneNumber { get; set; }
+        public required string PhoneNumber { get; set; }
 
         [StringLength(100)]
-        public string Password { get; set; }
+        public required string Password { get; set; }
 
         [Required]
         [StringLength(100)]
         [EmailAddress]
-        public string Email { get; set; }
+        public required string Email { get; set; }
 
-        public IFormFile Image { get; set; }
+        public required IFormFile Image { get; set; }
     }
 
 }

@@ -66,8 +66,8 @@ namespace Patient_Appointment_APIS.Models
             try
             {
                 string query = $"UPDATE {tableName} SET ";
-                List<string> columns = new List<string>();
-                List<MySqlParameter> values = new List<MySqlParameter>();
+                List<string> columns = new();
+                List<MySqlParameter> values = new();
 
                 foreach (var entry in map)
                 {
