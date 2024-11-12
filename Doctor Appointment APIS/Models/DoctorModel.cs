@@ -10,6 +10,8 @@ namespace Doctor_Appointment_APIS.Models
         public required string Id { get; set; }
 
         [Required]
+
+
         [StringLength(255)]
         public required string Fullname { get; set; }
 
